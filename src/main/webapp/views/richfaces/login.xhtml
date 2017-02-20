@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:rich="http://richfaces.org/rich">
+	
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Connexion </title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/styles.css"/>
+     <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/bootstrap.min.css"/>
+</h:head>
+
+<h:body>
+   <section class="container">
+        <div class="pages">
+            <header>
+                <h1><h:outputText value="#{msg.login_title}"/></h1>
+            </header>
+            <div class="connexion">
+                <h:form>
+                    <div class="form-group form-group-lg">
+                        <h:inputText value="#{loginBean.email}" styleClass="form-control no-border" id="email" p:placeholder="Email"/>
+                    </div>
+                   <div class="form-group form-group-lg">
+                        <h:inputSecret value="#{loginBean.password}" styleClass="form-control no-border" id="password" p:placeholder="Password"/>
+                    </div>
+                      <rich:messages style="color:red;margin:8px;"  globalOnly="true" />
+                    <h:commandButton styleClass="btn btn-success no-border btn-lg btn-block" value="Valider" action="#{loginBean.loginAction}" />
+                </h:form>
+            </div>
+        </div>
+    </section>
+</h:body>
+
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+ 
+<h:head>
+     <title>Liste d'Utilisateurs </title>
+     <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min.css"/>
+     <link rel="stylesheet" href="#{request.contextPath}/css/styles.css"/>
+     <script type="text/javascript" src="#{request.contextPath}/js/demo.js"></script>
+</h:head>
+<h:body>
+	<h:form>
+		<section class="container">
+        <div class="pages">
+            <header>
+		            <div>
+			              <div align="left">
+			                 <h1>
+			                  		<h:outputText value="#{msg.home_wel}"/> <b>${listUserManagedBean.loginUser.nom}</b>
+				                  	<h:commandLink  action="#{loginBean.logoutAction()}">
+			    				  			<h:graphicImage width="30" value="../../img/btn_logout.jpg" title="#{msg.list_users_logout}"/>
+			    					</h:commandLink>
+			                 </h1>
+			                <br/>
+			                <h1><h:outputText value="#{msg.list_users_msg}"/> <h:link outcome="create-user"><h:graphicImage width="30" value="../../img/carousel_plus.png" title="#{msg.list_users_add_user}"/></h:link></h1>
+			              </div>
+			               
+			             <div align="right"><h:selectOneMenu value="#{languageManagedBean.localeCode}" onchange="submit()"
+										valueChangeListener="#{languageManagedBean.countryLocaleCodeChanged}">
+				   						<f:selectItems value="#{languageManagedBean.countriesInMap}" />
+				   					</h:selectOneMenu>
+			             </div>
+		             </div>
+	            </header>
+            <div class="taches table-responsive">
+	            <rich:dataTable id="userListDatatableId" value="#{listUserManagedBean.listeUsers}" var="currentUser"
+	    			styleClass="table table-bordered"
+	    			headerClass="order-table-header"
+	    			rowClasses="order-table-odd-row,order-table-even-row">
+	    			<rich:column>
+	    				<!-- column header -->
+	    				<f:facet name="header"><h:outputText value="#{msg.list_users_name}"/></f:facet>
+	    				#{currentUser.nom}
+	    			</rich:column>
+	    			<rich:column>
+	    				<f:facet name="header"><h:outputText value="#{msg.list_users_firstname}"/></f:facet>
+	    				#{currentUser.prenom}
+	    			</rich:column>
+	    			<rich:column>
+	    				<f:facet name="header"><h:outputText value="#{msg.list_users_code_postal}"/></f:facet>
+	    				#{currentUser.codePostal}
+	    			</rich:column>
+	    			<rich:column>
+	    				<f:facet name="header"><h:outputText value="#{msg.list_users_service}"/></f:facet>
+	    				#{currentUser.libDepartement}
+	    			</rich:column>
+	    			<rich:column>
+	    				<f:facet name="header"><h:outputText value="#{msg.list_users_mail}"/></f:facet>
+	    				#{currentUser.email}
+	    			</rich:column>
+	    			<rich:column>
+	    				<f:facet name="header"><h:outputText value="#{msg.list_users_date_inscription}"/></f:facet>
+	    				 <h:outputText value="#{currentUser.dateInscription}">
+	                 	    <f:convertDateTime pattern="dd-MM-yyyy"/>
+	                	</h:outputText>
+	    			</rich:column>
+	    			<rich:column>
+	    				<f:facet name="header">Actions</f:facet>
+						<h:link outcome="preload-user">
+							<f:param name="idUserParam" value="#{currentUser.idUtilisateur}" />
+							<h:graphicImage width="30" value="../../img/btn_detail.png" title="#{msg.list_users_disp_detail}"/>
+						</h:link>
+						<a4j:commandLink  render="userListDatatableId" action="#{listUserManagedBean.deleteUserById(currentUser.idUtilisateur)}" onclick="return confirm('Etes vous certain de vouloir supprimer Cette entite ?');">
+	    				 <h:graphicImage width="30" value="../../img/btn_delete.jpg" title="#{msg.list_users_delete_user}"/>
+	    				</a4j:commandLink>
+	    			</rich:column>
+	    		</rich:dataTable>
+            </div>
+        </div>
+    </section>
+	</h:form>
+
+</h:body>
+</html>

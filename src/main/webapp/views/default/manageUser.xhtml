@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Inscription </title>
+      <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="#{request.contextPath}/css/styles.css"/>
+</h:head>
+
+<h:body>
+  <h:form>
+		    <section class="container">
+		        <div class="pages">
+		            <header>
+		                <div>
+		                  <div align="left">
+		                  	<h1><h:outputText value="#{msg.subscribe_title}"/></h1>
+		                  	<h:outputText value="#{msg.home_wel}"/> <b>${userManagedBean.loginUser.nom}</b>
+		                  	<h:commandLink  action="#{loginBean.logoutAction()}">
+			    				  			<h:graphicImage width="30" value="../../img/btn_logout.jpg" title="#{msg.list_users_logout}"/>
+			    			</h:commandLink>
+		                  </div>
+		                  <div align="right"><h:selectOneMenu value="#{languageManagedBean.localeCode}" onchange="submit()"
+									valueChangeListener="#{languageManagedBean.countryLocaleCodeChanged}">
+			   						<f:selectItems value="#{languageManagedBean.countriesInMap}" />
+			   					</h:selectOneMenu></div>
+		                </div>
+		            </header>
+		            <div class="connexion">
+		                
+		                    <div class="form-group form-group-lg">
+		                     	<h:selectOneRadio value="#{userManagedBean.userCourant.sexe}" required="true" id="genre" >
+				                  <f:selectItem itemLabel="#{msg.subscribe_gender_male}" itemValue="1"/>
+				                  <f:selectItem itemLabel="#{msg.subscribe_gender_female}" itemValue="2"/>
+				                </h:selectOneRadio>
+		               			 <h:message for="genre"/>
+		                    </div>
+		                    <div class="form-group form-group-lg">
+		                        <h:inputText class="form-control no-border" id="prenom" p:placeholder="FirstName" value="#{userManagedBean.userCourant.prenom}"/>
+		                        <h:message for="prenom"/>
+		                    </div>
+		                    <div class="form-group form-group-lg">
+		                         <h:inputText class="form-control no-border" id="nom" p:placeholder="Name" value="#{userManagedBean.userCourant.nom}"/>
+		                         <h:message for="nom"/>
+		                    </div>
+		                    <div class="form-group form-group-lg">
+		                         <h:inputText class="form-control no-border" id="email" p:placeholder="Email"  value="#{userManagedBean.userCourant.email}"/>
+		                         <h:message for="email"/>
+		                    </div>
+		                    <div class="form-group form-group-lg">
+		                         <h:inputSecret class="form-control no-border" id="password" p:placeholder="Password" value="#{userManagedBean.userCourant.password}"/>
+		                         <h:message for="password"/>
+		                    </div>
+		                    <div class="form-group form-group-lg">
+		                         <h:inputText class="form-control no-border" id="codePostal" p:placeholder="Code Postal" value="#{userManagedBean.userCourant.codePostal}"/>
+		                         <h:message for="codePostal"/>
+		                    </div>
+		                    <div class="form-group form-group-lg">
+		                       <h:selectOneMenu value="#{userManagedBean.userCourant.codeDepartement}" >
+								    <f:selectItems value="#{userManagedBean.departements}" var="depCourant" itemValue="#{depCourant.codeDepartement}" itemLabel="#{depCourant.libDepartement}" />
+							   </h:selectOneMenu>
+		                    </div>
+		                     <br/>	
+							 <h:inputHidden  value="${userManagedBean.userCourant.idUtilisateur}"/>
+		                    <h:commandButton styleClass="btn btn-success no-border btn-lg btn-block" value="Valider" action="#{userManagedBean.addUserAction}" />
+		                    <h:messages style="color:red;margin:8px;"  globalOnly="true" />
+		            </div>
+		        </div>
+		    </section>
+    </h:form>
+</h:body>
+
+</html>

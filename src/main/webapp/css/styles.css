@@ -1,0 +1,71 @@
+.formulaire{
+	width: 300px;
+	margin: 0 auto;
+}
+
+.erreur ul{
+	color: red;
+	list-style-type: none;
+	text-align: center;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+body{
+	background: #f3f3f4;
+	color: #888888;
+}
+
+header{
+	border-bottom: 1px solid #888888;
+	margin-bottom: 10px;
+}
+.accueil  {
+	margin-top: 150px;
+}
+
+.navbar{
+	border-radius: 0px;
+}
+
+.tache {
+	background: #ffffff;
+    border: 1px solid #e7eaec;
+    margin-top: 10px;
+    padding: 0px 15px 23px;
+    min-height: 48px;
+    color: #676a6c;
+}
+.no-border{
+	border-radius: 0 !important;
+}
+.tache .footer{
+	margin-top: 10px;
+}
+.connexion, .inscription{
+	width: 300px;
+	margin: 10px auto;
+}
+
+.order-table{   
+	border-collapse:collapse;
+}
+
+.order-table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid #BBBBBB;
+	padding:16px;
+}
+
+.order-table-odd-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+}
+
+.order-table-even-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #F9F9F5;
+	border-top:1px solid #BBBBBB;
+}

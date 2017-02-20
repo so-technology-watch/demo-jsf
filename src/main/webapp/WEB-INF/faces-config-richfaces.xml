@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    <application>
+		<!-- URL du package contenant les message_XX.properties -->
+       <resource-bundle>
+             <base-name>org.demo.formation.web.jsf.properties.messages</base-name>
+             <var>msg</var>
+       </resource-bundle>
+		<!-- Ajout de la langue par défaut et des langues supportées -->
+       <locale-config>
+             <default-locale>fr</default-locale>
+             <supported-locale>fr</supported-locale>
+             <supported-locale>en</supported-locale>
+       </locale-config>
+    <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+   </application>
+  
+  <!-- Navigation pour la connexon -->
+   <navigation-rule>
+    <from-view-id>/views/richfaces/login.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>SUCCESS</from-outcome>
+      <to-view-id>/views/richfaces/userList.xhtml</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>ERROR</from-outcome>
+      <to-view-id>/views/richfaces/login.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <!-- Navigation pour la creation d'un utilisateur -->
+  <navigation-rule>
+    <from-view-id>/views/richfaces/manageUser.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>SUCCESS</from-outcome>
+      <to-view-id>/views/richfaces/userList.xhtml</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>ERROR</from-outcome>
+      <to-view-id>/views/richfaces/manageUser.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+  <!-- Navigation pour l'affichage de la page d'inscription prechargee-->
+  <navigation-rule>
+    <from-view-id>/views/richfaces/userList.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>preload-user</from-outcome>
+      <to-view-id>/views/richfaces/manageUser.xhtml</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>create-user</from-outcome>
+      <to-view-id>/views/richfaces/manageUser.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+  <!-- Navigation pour la deconnexion-->
+  <navigation-rule>
+    <from-view-id>/views/richfaces/userList.xhtml</from-view-id>
+    <navigation-case>
+      <from-action>#{loginBean.logoutAction()}</from-action>
+      <from-outcome>SUCCESS</from-outcome>
+      <to-view-id>/views/richfaces/login.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+</faces-config>
