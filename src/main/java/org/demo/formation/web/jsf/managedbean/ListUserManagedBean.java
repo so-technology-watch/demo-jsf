@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
-import org.demo.formation.librairie.bean.provider.PersistenceServiceProvider;
+import org.demo.formation.librairie.bean.provider.FactoryServiceProvider;
 import org.demo.formation.librairie.entity.Utilisateur;
 import org.demo.formation.librairie.service.IUtilisateurService;
 import org.demo.formation.librairie.service.impl.UtilisateurServiceImpl;
@@ -14,7 +14,7 @@ import org.demo.formation.web.jsf.util.SessionManagerUtils;
 @ManagedBean(name= "listUserManagedBean")
 public class ListUserManagedBean {
 
-private IUtilisateurService userService = PersistenceServiceProvider.getService(UtilisateurServiceImpl.class);
+private IUtilisateurService userService = FactoryServiceProvider.getService(UtilisateurServiceImpl.class);
 
 private List<Utilisateur> listeUsers;
 private Utilisateur loginUser;

@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang.StringUtils;
-import org.demo.formation.librairie.bean.provider.PersistenceServiceProvider;
+import org.demo.formation.librairie.bean.provider.FactoryServiceProvider;
 import org.demo.formation.librairie.entity.Utilisateur;
 import org.demo.formation.librairie.exception.DemoBusinessException;
 import org.demo.formation.librairie.service.IUtilisateurService;
@@ -27,7 +27,7 @@ public class UserManagedBean implements Serializable{
 	 */
 	private static final long serialVersionUID = -8437951921380040419L;
 	private Utilisateur userCourant;
-	private IUtilisateurService userService = PersistenceServiceProvider.getService(UtilisateurServiceImpl.class);
+	private IUtilisateurService userService = FactoryServiceProvider.getService(UtilisateurServiceImpl.class);
 	private Utilisateur loginUser;
 
 	public UserManagedBean() {
