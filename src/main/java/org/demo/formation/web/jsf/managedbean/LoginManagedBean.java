@@ -9,10 +9,11 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.demo.formation.librairie.bean.provider.PersistenceServiceProvider;
 import org.demo.formation.librairie.entity.Utilisateur;
 import org.demo.formation.librairie.service.IUtilisateurService;
+import org.demo.formation.librairie.service.impl.UtilisateurServiceImpl;
 import org.demo.formation.web.jsf.util.DemoConstantes;
-import org.springframework.web.jsf.FacesContextUtils;
 
 @ManagedBean(name = "loginBean")
 @RequestScoped
@@ -24,11 +25,10 @@ public class LoginManagedBean implements Serializable{
 	private static final long serialVersionUID = 2298573988062240389L;
 	private String email;
 	private String password;
-	private IUtilisateurService userService;
+	private IUtilisateurService userService = PersistenceServiceProvider.getService(UtilisateurServiceImpl.class);
 	
 	
 	public LoginManagedBean(){
-		this.userService = (IUtilisateurService)FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean("userServiceBean");
 	}
 	
 	public String loginAction(){

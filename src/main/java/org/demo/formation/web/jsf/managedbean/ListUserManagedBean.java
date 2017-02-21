@@ -3,18 +3,18 @@ package org.demo.formation.web.jsf.managedbean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 
+import org.demo.formation.librairie.bean.provider.PersistenceServiceProvider;
 import org.demo.formation.librairie.entity.Utilisateur;
 import org.demo.formation.librairie.service.IUtilisateurService;
+import org.demo.formation.librairie.service.impl.UtilisateurServiceImpl;
 import org.demo.formation.web.jsf.util.DemoConstantes;
 import org.demo.formation.web.jsf.util.SessionManagerUtils;
-import org.springframework.web.jsf.FacesContextUtils;
 
 @ManagedBean(name= "listUserManagedBean")
 public class ListUserManagedBean {
-	
-private IUtilisateurService userService;
+
+private IUtilisateurService userService = PersistenceServiceProvider.getService(UtilisateurServiceImpl.class);
 
 private List<Utilisateur> listeUsers;
 private Utilisateur loginUser;
@@ -23,12 +23,11 @@ private Utilisateur loginUser;
 	public ListUserManagedBean(){
 		//this.userService = new UtilisateurServiceImpl();
 		//On recupere la liste en base
-		this.userService = (IUtilisateurService)FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean("userServiceBean");
+		//this.userService = (IUtilisateurService)FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean("userServiceBean");
 		this.listeUsers = this.userService.findAll();
         loginUser = (Utilisateur)SessionManagerUtils.getObjectInSession(DemoConstantes.USER_SESSION_KEY);
 	}
 
-	
 	public String deleteUserById(Long idUser){
 		if (idUser != null){
 			this.userService.deleteById(idUser);

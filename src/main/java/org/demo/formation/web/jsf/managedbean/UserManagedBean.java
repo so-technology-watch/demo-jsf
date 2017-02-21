@@ -9,13 +9,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang.StringUtils;
+import org.demo.formation.librairie.bean.provider.PersistenceServiceProvider;
 import org.demo.formation.librairie.entity.Utilisateur;
 import org.demo.formation.librairie.exception.DemoBusinessException;
 import org.demo.formation.librairie.service.IUtilisateurService;
+import org.demo.formation.librairie.service.impl.UtilisateurServiceImpl;
 import org.demo.formation.librairie.util.DepartementEnum;
 import org.demo.formation.web.jsf.util.DemoConstantes;
 import org.demo.formation.web.jsf.util.SessionManagerUtils;
-import org.springframework.web.jsf.FacesContextUtils;
 
 @ManagedBean(name = "userManagedBean")
 @ViewScoped
@@ -26,11 +27,11 @@ public class UserManagedBean implements Serializable{
 	 */
 	private static final long serialVersionUID = -8437951921380040419L;
 	private Utilisateur userCourant;
-	private IUtilisateurService userService;
+	private IUtilisateurService userService = PersistenceServiceProvider.getService(UtilisateurServiceImpl.class);
 	private Utilisateur loginUser;
 
 	public UserManagedBean() {
-		this.userService = (IUtilisateurService)FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean("userServiceBean");
+		//this.userService = (IUtilisateurService)FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean("userServiceBean");
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String idUserParam = params.get("idUserParam");
 		if (StringUtils.isNotBlank(idUserParam)){//On affiche en mode modification
@@ -41,7 +42,6 @@ public class UserManagedBean implements Serializable{
 		}
 		loginUser = (Utilisateur)SessionManagerUtils.getObjectInSession(DemoConstantes.USER_SESSION_KEY);
 	}
-
 
 
 	public String addUserAction(){
