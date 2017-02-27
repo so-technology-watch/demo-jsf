@@ -74,12 +74,12 @@
 		    			<h:column>
 		    				<f:facet name="header">Actions</f:facet>
 		    				<!-- Lien pour l'affichage du detail -->
-							<h:link outcome="preload-user" disabled="#{currentUser.idUtilisateur == 0}">
-								<f:param name="idUserParam" value="#{currentUser.idUtilisateur}" />
+							<h:link outcome="preload-user" disabled="#{currentUser.idEleve == 0}">
+								<f:param name="idUserParam" value="#{currentUser.idEleve}" />
 								<h:graphicImage width="30" value="../../img/btn_detail.png" title="#{msg.list_users_disp_detail}"/>
 							</h:link>
 							<!-- Lien pour l'affichage du bouton de suppression -->
-							<h:commandLink  action="#{listUserManagedBean.deleteUserById(currentUser.idUtilisateur)}" onclick="return confirm('Etes vous certain de vouloir supprimer Cette entite ?');" disabled="#{currentUser.idUtilisateur == 0}">
+							<h:commandLink  action="#{listUserManagedBean.deleteUserById(currentUser.idEleve)}" onclick="return confirm('Etes vous certain de vouloir supprimer Cette entite ?');" disabled="#{currentUser.idEleve == 0}">
 		    				  <f:ajax render="userListDatatableId"/>
 		    				  <h:graphicImage width="30" value="../../img/btn_delete.jpg" title="#{msg.list_users_delete_user}"/>
 		    				</h:commandLink>

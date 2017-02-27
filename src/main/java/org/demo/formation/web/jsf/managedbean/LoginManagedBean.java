@@ -10,9 +10,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.demo.formation.librairie.bean.provider.FactoryServiceProvider;
-import org.demo.formation.librairie.entity.Utilisateur;
-import org.demo.formation.librairie.service.IUtilisateurService;
-import org.demo.formation.librairie.service.impl.UtilisateurServiceImpl;
+import org.demo.formation.librairie.service.IEleveService;
+import org.demo.formation.librairie.service.impl.EleveServiceImpl;
+import org.demo.formation.librairie.service.view.EleveView;
 import org.demo.formation.web.jsf.util.DemoConstantes;
 
 @ManagedBean(name = "loginBean")
@@ -25,14 +25,14 @@ public class LoginManagedBean implements Serializable{
 	private static final long serialVersionUID = 2298573988062240389L;
 	private String email;
 	private String password;
-	private IUtilisateurService userService = FactoryServiceProvider.getService(UtilisateurServiceImpl.class);
+	private IEleveService userService = FactoryServiceProvider.getService(EleveServiceImpl.class);
 	
 	
 	public LoginManagedBean(){
 	}
 	
 	public String loginAction(){
-		Utilisateur loginUser = this.userService.getUserByEmailAndPassword(email, password);
+		EleveView loginUser = this.userService.getUserByEmailAndPassword(email, password);
 		if (loginUser != null){
 			FacesContext ctx = FacesContext.getCurrentInstance();
 	        ExternalContext extCtx = ctx.getExternalContext();

@@ -10,10 +10,11 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang.StringUtils;
 import org.demo.formation.librairie.bean.provider.FactoryServiceProvider;
-import org.demo.formation.librairie.entity.Utilisateur;
+import org.demo.formation.librairie.entity.Eleve;
 import org.demo.formation.librairie.exception.DemoBusinessException;
-import org.demo.formation.librairie.service.IUtilisateurService;
-import org.demo.formation.librairie.service.impl.UtilisateurServiceImpl;
+import org.demo.formation.librairie.service.IEleveService;
+import org.demo.formation.librairie.service.impl.EleveServiceImpl;
+import org.demo.formation.librairie.service.view.EleveView;
 import org.demo.formation.librairie.util.DepartementEnum;
 import org.demo.formation.web.jsf.util.DemoConstantes;
 import org.demo.formation.web.jsf.util.SessionManagerUtils;
@@ -26,9 +27,9 @@ public class UserManagedBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -8437951921380040419L;
-	private Utilisateur userCourant;
-	private IUtilisateurService userService = FactoryServiceProvider.getService(UtilisateurServiceImpl.class);
-	private Utilisateur loginUser;
+	private EleveView userCourant;
+	private IEleveService userService = FactoryServiceProvider.getService(EleveServiceImpl.class);
+	private EleveView loginUser;
 
 	public UserManagedBean() {
 		//this.userService = (IUtilisateurService)FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean("userServiceBean");
@@ -36,11 +37,11 @@ public class UserManagedBean implements Serializable{
 		String idUserParam = params.get("idUserParam");
 		if (StringUtils.isNotBlank(idUserParam)){//On affiche en mode modification
 			Long idUser = Long.parseLong(idUserParam);
-			this.userCourant = this.userService.getEntityById(idUser);
+			this.userCourant = this.userService.getViewById(idUser);
 		}else {//On affiche en mode creation
-			this.userCourant = new Utilisateur();
+			this.userCourant = new EleveView();
 		}
-		loginUser = (Utilisateur)SessionManagerUtils.getObjectInSession(DemoConstantes.USER_SESSION_KEY);
+		loginUser = (EleveView)SessionManagerUtils.getObjectInSession(DemoConstantes.USER_SESSION_KEY);
 	}
 
 
@@ -58,7 +59,7 @@ public class UserManagedBean implements Serializable{
 
 	public String loadUserAction(Long idUser){
 		if (idUser != null){
-			this.userCourant = this.userService.getEntityById(idUser);
+			this.userCourant = this.userService.getViewById(idUser);
 		}
 		return DemoConstantes.MSG_OK;
 	}
@@ -67,23 +68,23 @@ public class UserManagedBean implements Serializable{
 		return DepartementEnum.values();
 	}
 
-	public Utilisateur getUserCourant() {
+	public EleveView getUserCourant() {
 		return userCourant;
 	}
 
-	public void setUserCourant(Utilisateur userCourant) {
+	public void setUserCourant(EleveView userCourant) {
 		this.userCourant = userCourant;
 	}
 
 
 
-	public Utilisateur getLoginUser() {
+	public EleveView getLoginUser() {
 		return loginUser;
 	}
 
 
 
-	public void setLoginUser(Utilisateur loginUser) {
+	public void setLoginUser(EleveView loginUser) {
 		this.loginUser = loginUser;
 	}
 }
